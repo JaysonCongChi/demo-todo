@@ -1,6 +1,11 @@
+// Buoc 1: goi bien bang id
+// Buoc 2: add su kien submut
+// Buoc 3: them su kien ngam chan
+// Buoc 4: tao 1 ham chu bien
+// Buoc 5: dung if
 let todos = [];
 
-/*--- HANDLE ADD FORM ---*/
+// HANDLE ADD FORM
 const addInputNode = document.getElementById("addInput");
 const addFormNode = document.getElementById("addForm");
 addFormNode.addEventListener("submit", (event) => {
@@ -25,9 +30,10 @@ function addTodo(addedValue) {
 /*--- HANDLE RENDER TODO-ITEMS ---*/
 function renderTodos() {
   // create todo list node
+  // tao mot cai todo de them gia tri vao
   const todoListNode = document.getElementById("todoList");
   todoListNode.innerHTML = "";
-
+  // lặp qua mảng "todos" để xử lý các mục việc cần làm kết xuất
   // loop through "todos" array to handle render todo-items
   todos.forEach((todo) => {
     // this is todo-item's keys
@@ -37,13 +43,15 @@ function renderTodos() {
     const todoItemNode = document.createElement("li");
     todoItemNode.className = `todo-item ${isDone ? "done" : ""}`;
     todoItemNode.id = id;
-
+    // lam sao cho hien thu thu muc can thao tac
     // labelNode: render todo-item label
     const labelNode = document.createElement("span");
     labelNode.className = "todo-label";
     labelNode.innerText = label;
 
+    // tom gon cac hanh dong can lam
     // actionNode: wrap todo-item actions
+    // them hanh dong add id vao
     const actionNode = document.createElement("div");
     actionNode.className = "todo-action";
 
@@ -55,7 +63,7 @@ function renderTodos() {
       event.preventDefault();
       deleteTodo(id);
     });
-
+    // them hanh dong chinh sua khi nhan vao
     // editBtnNode: button handle edit action
     const editBtnNode = document.createElement("button");
     editBtnNode.className = "btn btn-edit";
@@ -64,7 +72,7 @@ function renderTodos() {
       event.preventDefault();
       toggleEditView(id);
     });
-
+    // lenh xu ly hanh dong khi thuc hien tac vu xong
     // doneBtnNode: button handle done action
     const doneBtnNode = document.createElement("button");
     doneBtnNode.className = "btn btn-done";
@@ -73,12 +81,12 @@ function renderTodos() {
       event.preventDefault();
       updateTodoStatus(id);
     });
-
+    // xu ly dau vao khi tiep nhan dang ky cua nguoi dung dien vao
     // editInputNode: input handle get user edited-label
     const editInputNode = document.createElement("input");
     editInputNode.className = "input editInput";
     editInputNode.value = label;
-
+    // nut xu ly de luu sau khi xu ly xong
     // saveBtnNode: button handle save user edited-label
     const saveBtnNode = document.createElement("button");
     saveBtnNode.className = "btn";
@@ -95,7 +103,7 @@ function renderTodos() {
         editInputNode.value = "";
       }
     });
-
+    // neu dung thi no se add va gui cai ma da chinh sua xong
     // if "isEditting" true, render edit view with editFormNode
     if (isEditting) {
       editFormNode.appendChild(editInputNode);
@@ -103,6 +111,7 @@ function renderTodos() {
 
       todoItemNode.appendChild(editFormNode);
     }
+    // neu sai se hien thi lai che do xem tt va chinh sua
     // if "isEditting" false, render info view with labelNode & actionNode
     else {
       actionNode.appendChild(deleteBtnNode);
@@ -119,7 +128,7 @@ function renderTodos() {
 }
 /*-----------------------*/
 
-/*--- FUNCTIONS ---*/
+// FUNCTIONS
 /**
  * handle delete todo item by id
  * @param {*} id
