@@ -59,8 +59,8 @@ function renderTodos() {
     const deleteBtnNode = document.createElement("button");
     deleteBtnNode.className = "btn btn-delete";
     deleteBtnNode.innerText = "Delete";
-    deleteBtnNode.addEventListener("click", (event) => {
-      event.preventDefault();
+    deleteBtnNode.addEventListener("click", (e) => {
+      e.preventDefault();
       deleteTodo(id);
     });
     // them hanh dong chinh sua khi nhan vao
@@ -68,8 +68,8 @@ function renderTodos() {
     const editBtnNode = document.createElement("button");
     editBtnNode.className = "btn btn-edit";
     editBtnNode.innerText = "Edit";
-    editBtnNode.addEventListener("click", (event) => {
-      event.preventDefault();
+    editBtnNode.addEventListener("click", (e) => {
+      e.preventDefault();
       toggleEditView(id);
     });
     // lenh xu ly hanh dong khi thuc hien tac vu xong
@@ -77,8 +77,8 @@ function renderTodos() {
     const doneBtnNode = document.createElement("button");
     doneBtnNode.className = "btn btn-done";
     doneBtnNode.innerText = isDone ? "Undone" : "Done";
-    doneBtnNode.addEventListener("click", (event) => {
-      event.preventDefault();
+    doneBtnNode.addEventListener("click", (e) => {
+      e.preventDefault();
       updateTodoStatus(id);
     });
     // xu ly dau vao khi tiep nhan dang ky cua nguoi dung dien vao
@@ -95,8 +95,8 @@ function renderTodos() {
     // editFormNode: form cover & handle submit edited-label
     const editFormNode = document.createElement("form");
     editFormNode.className = "form editForm";
-    editFormNode.addEventListener("submit", (event) => {
-      event.preventDefault();
+    editFormNode.addEventListener("submit", (e) => {
+      e.preventDefault();
       if (editInputNode.value) {
         updateTodoLabel(id, editInputNode.value);
         toggleEditView(id);
@@ -129,19 +129,14 @@ function renderTodos() {
 /*-----------------------*/
 
 // FUNCTIONS
-/**
- * handle delete todo item by id
- * @param {*} id
- */
+
+// handle delete todo item by id
 function deleteTodo(id) {
   todos = todos.filter((todo) => todo.id !== id);
   renderTodos();
 }
 
-/**
- * handle update todo item's status
- * @param {*} id
- */
+// handle update todo item's status
 function updateTodoStatus(id) {
   todos = todos.map((todo) =>
     todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
@@ -149,10 +144,7 @@ function updateTodoStatus(id) {
   renderTodos();
 }
 
-/**
- * handle toggle todo item's edit view
- * @param {*} id
- */
+// handle toggle todo item's edit view
 function toggleEditView(id) {
   todos = todos.map((todo) =>
     todo.id === id ? { ...todo, isEditting: !todo.isEditting } : todo
@@ -160,11 +152,7 @@ function toggleEditView(id) {
   renderTodos();
 }
 
-/**
- * handle update todo item's label
- * @param {*} id
- * @param {*} editedLabel
- */
+// handle update todo item's label
 function updateTodoLabel(id, editedLabel) {
   todos = todos.map((todo) =>
     todo.id === id ? { ...todo, label: editedLabel } : todo
